@@ -22,7 +22,7 @@ namespace SysReservacionEventosESFE.AccesoADatos
         {
             //optionsBuilder.UseSqlServer(@"workstation id=SysInventarioFacturacion503.mssql.somee.com;packet size=4096;user id=romerooscar_SQLLogin_1;pwd=awaosafn8m;data source=SysInventarioFacturacion503.mssql.somee.com;persist security info=False;initial catalog=SysInventarioFacturacion503;Encrypt=False;TrustServerCertificate=False;");
 
-            optionsBuilder.UseSqlServer(@"workstation id=BDComercialMartinez.mssql.somee.com;packet size=4096;user id=José0407_SQLLogin_1;pwd=rz363vdvcw;data source=BDComercialMartinez.mssql.somee.com;persist security info=False;initial catalog=BDComercialMartinez;Encrypt=False;TrustServerCertificate=False;");
+            optionsBuilder.UseSqlServer(@"workstation id=SysReservacionesEsfe.mssql.somee.com;packet size=4096;user id=JavierGarcia_SQLLogin_1;pwd=aibjbvtba6;data source=SysReservacionesEsfe.mssql.somee.com;persist security info=False;initial catalog=SysReservacionesEsfe;Encrypt=False;TrustServerCertificate=False;");
         }
 
     }
