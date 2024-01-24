@@ -21,3 +21,4 @@ namespace SysReservacionEventosESFE.EntidadesDeNegocio
         public List<Usuario>? Usuario { get; set; }
     }
 }
+//prueba
