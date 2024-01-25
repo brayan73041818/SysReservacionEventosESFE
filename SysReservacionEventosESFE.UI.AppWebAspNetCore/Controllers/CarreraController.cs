@@ -1,82 +1,115 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+/********************************/
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using SysReservacionEventosESFE.EntidadesDeNegocio;
+using SysReservacionEventosESFE.LogicaDeNegocio;
 
 namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
 {
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+    [Authorize(Roles = "Administrador")]
     public class CarreraController : Controller
     {
-        // GET: CarreraController
-        public ActionResult Index()
+        CarreraBL carreraBL = new CarreraBL();
+        // GET: RolController
+        public async Task<IActionResult> Index(Carrera pCarrera = null)
         {
+            if (pCarrera == null)
+                pCarrera = new Carrera();
+            if (pCarrera.Top_Aux == 0)
+                pCarrera.Top_Aux = 10;
+            else if (pCarrera.Top_Aux == -1)
+                pCarrera.Top_Aux = 0;
+            var carreras = await carreraBL.BuscarAsync(pCarrera);
+            ViewBag.Top = pCarrera.Top_Aux;
+            return View(carreras);
+        }
+
+        // GET: RolController/Details/5
+        public async Task<IActionResult> Details(int IdCarrera)
+        {
+            var carrera = await carreraBL.ObtenerPorIdAsync(new Carrera { IdCarrera = IdCarrera });
+            return View(carrera);
+        }
+
+        // GET: RolController/Create
+        public IActionResult Create()
+        {
+            ViewBag.Error = "";
             return View();
         }
 
-        // GET: CarreraController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: CarreraController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: CarreraController/Create
+        // POST: RolController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(Carrera pCarrera)
         {
             try
             {
+                int result = await carreraBL.CrearAsync(pCarrera);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.Error = ex.Message;
+                return View(pCarrera);
             }
         }
 
-        // GET: CarreraController/Edit/5
-        public ActionResult Edit(int id)
+        // GET: RolController/Edit/5
+        public async Task<IActionResult> Edit(Carrera pCarrera)
         {
-            return View();
+            var carrera = await carreraBL.ObtenerPorIdAsync(pCarrera);
+            ViewBag.Error = "";
+            return View(carrera);
         }
 
-        // POST: CarreraController/Edit/5
+        // POST: RolController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int IdCarrera, Carrera pCarrera)
         {
             try
             {
+                int result = await carreraBL.ModificarAsync(pCarrera);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.Error = ex.Message;
+                return View(pCarrera);
             }
         }
 
-        // GET: CarreraController/Delete/5
-        public ActionResult Delete(int id)
+        // GET: RolController/Delete/5
+        public async Task<IActionResult> Delete(Carrera pCarrera)
         {
-            return View();
+            ViewBag.Error = "";
+            var carrera = await carreraBL.ObtenerPorIdAsync(pCarrera);
+            return View(carrera);
         }
 
-        // POST: CarreraController/Delete/5
+        // POST: RolController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> Delete(int IdCarrera, Carrera pCarrera)
         {
             try
             {
+                int result = await carreraBL.EliminarAsync(pCarrera);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.Error = ex.Message;
+                return View(pCarrera);
             }
         }
     }
