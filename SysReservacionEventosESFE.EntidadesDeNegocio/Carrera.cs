@@ -18,6 +18,6 @@ namespace SysReservacionEventosESFE.EntidadesDeNegocio
         [NotMapped]
         public int Top_Aux { get; set; }
 
-        public List<Usuario>? Usuario { get; set; }
+        public List<Evento>? Evento { get; set; }
     }
 }
