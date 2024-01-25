@@ -37,6 +37,7 @@ namespace SysReservacionEventosESFE.EntidadesDeNegocio
         public DateTime FechaRegistro { get; set; }
        
         public Rol Rol { get; set; }
+
         [NotMapped]
         public int Top_Aux { get; set; }
 
@@ -46,6 +47,8 @@ namespace SysReservacionEventosESFE.EntidadesDeNegocio
         [Compare("Password", ErrorMessage = "Password y confirmar password deben de ser iguales")]
         [Display(Name = "Confirmar password")]
         public string ConfirmPassword_aux { get; set; }
+
+       
     }
     public enum Estatus_Usuario
     {
