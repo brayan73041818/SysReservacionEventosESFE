@@ -1,0 +1,57 @@
+﻿@model SysReservacionEventosESFE.EntidadesDeNegocio.EspaciosA
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>EspaciosA</h4>
+<hr />
+
+<form asp-action="Create">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" class="form-control">
+                    <option value="">SELECCIONAR</option>
+                    <option selected value="1">DISPONIBLE</option>
+                    <option value="2">OCUPADO</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    @*BOTONES GUARDAR Y CANCELAR*@
+
+    <div class="form-group" style="margin-top: 10px;">
+        <button type="submit" class="btn btn-success" style="margin-right: 10px;">
+            <i class="fas fa-save"></i> Guardar
+        </button>
+
+        <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
+            <i class="fas fa-times"></i> Cancelar
+        </button>
+    </div>
+
+    <span class="text-danger">@ViewBag.Error</span>
+
+</form>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

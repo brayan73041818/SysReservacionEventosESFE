@@ -16,6 +16,8 @@ namespace SysReservacionEventosESFE.EntidadesDeNegocio
         [Required(ErrorMessage = "Nombre es obligatorio")]
         [StringLength(30, ErrorMessage = "Maximo 30 caracteres")]
         public string? Nombre { get; set; }
+        public List<Evento>? Evento { get; set; }
+
         [NotMapped]
         public int Top_Aux { get; set; }
     }

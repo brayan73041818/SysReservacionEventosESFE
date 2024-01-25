@@ -23,6 +23,9 @@ namespace SysReservacionEventosESFE.EntidadesDeNegocio
         public string? Nombre { get; set; }
         [Required(ErrorMessage = "FormaDePago es obligatorio")]
         public byte? Status { get; set; }
+
+        public List<Evento>? Evento { get; set; }
+
         [NotMapped]
         public int Top_Aux { get; set; }
     }
