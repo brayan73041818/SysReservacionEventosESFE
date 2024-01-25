@@ -16,6 +16,7 @@ namespace SysReservacionEventosESFE.AccesoADatos
 
         public DbSet<Carrera> Carrera { get; set; }
         public DbSet<Institucion> Institucion { get; set; }
+        public DbSet<EspaciosA> EspaciosA { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
