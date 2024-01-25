@@ -10,6 +10,9 @@ namespace SysReservacionEventosESFE.EntidadesDeNegocio
 {
     public class Evento
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int IdEvento { get; set; }
 
         [ForeignKey("Usuario")]
         [Required(ErrorMessage = "Usuario es obligatorio")]

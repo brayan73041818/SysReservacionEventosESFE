@@ -18,8 +18,8 @@ using SysReservacionEventosESFE.LogicaDeNegocio;
 
 namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 {
-    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    [Authorize(Roles = "Administrador,Cajero")]
+    //[Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+    //[Authorize(Roles = "Administrador,Cajero")]
     public class UsuarioController : Controller
     {
         UsuarioBL usuarioBL = new UsuarioBL();
