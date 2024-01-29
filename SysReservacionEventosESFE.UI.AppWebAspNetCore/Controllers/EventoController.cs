@@ -173,6 +173,73 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
                 return View(Evento);
             }
         }
+
+        public async Task<IActionResult> Reserva()
+        {
+            ViewBag.Carrera = await CarreraBL.ObtenerTodosAsync();
+            ViewBag.Espacios = await EspaciosABL.ObtenerTodosAsync();
+            ViewBag.Usuario = await UsuarioBL.ObtenerTodosAsync();
+            ViewBag.Institucion = await InstitucionBL.ObtenerTodosAsync();
+
+            ViewBag.Error = "";
+            return View();
+        }
+
+        // POST: ProductoController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Reserva(Evento pEvento)
+        {
+            try
+            {
+                List<Evento> reservasExist = await EventoBL.BuscarAsync(pEvento);
+
+                if (ValidarReserva(pEvento, reservasExist))
+                {
+                    int result = await EventoBL.CrearAsync(pEvento);
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    // Aquí podrías lanzar una excepción o manejar de otra manera el error
+                    ViewBag.Carrera = await CarreraBL.ObtenerTodosAsync();
+                    ViewBag.Espacios = await EspaciosABL.ObtenerTodosAsync();
+                    ViewBag.Usuario = await UsuarioBL.ObtenerTodosAsync();
+                    ViewBag.Institucion = await InstitucionBL.ObtenerTodosAsync();
+                    ViewBag.Error = "La fecha ya está reservada para ese lugar.";
+                    return View(pEvento);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Carrera = await CarreraBL.ObtenerTodosAsync();
+                ViewBag.Espacios = await EspaciosABL.ObtenerTodosAsync();
+                ViewBag.Usuario = await UsuarioBL.ObtenerTodosAsync();
+                ViewBag.Institucion = await InstitucionBL.ObtenerTodosAsync();
+                ViewBag.Error = ex.Message;
+                return View(pEvento);
+            }
+        }
+
+        private bool ValidarReserva(Evento nuevaReserva, List<Evento> reservasExist)
+        {
+            foreach (var reservaExistente in reservasExist)
+            {
+                // Verifica si hay solapamiento de fechas para el mismo lugar
+                if (nuevaReserva.IdEvento != reservaExistente.IdEvento && // Para evitar comparar con la misma reserva
+                    nuevaReserva.IdEspaciosA == reservaExistente.IdEspaciosA && // Compara con el mismo lugar
+                    ((nuevaReserva.HoraInicio >= reservaExistente.HoraInicio && nuevaReserva.HoraInicio < reservaExistente.HoraFin) ||
+                    (nuevaReserva.HoraFin > reservaExistente.HoraFin && nuevaReserva.HoraFin <= reservaExistente.HoraFin)))
+                {
+                    return false; // Hay solapamiento
+                }
+            }
+
+            return true; // No hay solapamiento
+        }
+
     }
 }
+
+
 
