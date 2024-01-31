@@ -8,123 +8,165 @@
     List<SysReservacionEventosESFE.EntidadesDeNegocio.EspaciosA> espacios = ViewBag.Espacios as List<SysReservacionEventosESFE.EntidadesDeNegocio.EspaciosA>;
 }
 
+
 <h1>Create</h1>
 
-<h4>Evento</h4>
-<hr />
+        <h4>Evento</h4>
+        <hr />
 <form asp-action="Create">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Responsable" class="control-label"></label>
-                <input asp-for="Responsable" class="form-control" />
-                <span asp-validation-for="Responsable" class="text-danger"></span>
+            <!-- Tu formulario aquí -->
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Responsable" class="control-label"></label>
+                        <input asp-for="Responsable" class="form-control" />
+                        <span asp-validation-for="Responsable" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Descripcion" class="control-label"></label>
+                        <input asp-for="Descripcion" class="form-control" />
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">Numero de asistentes</label>
+                        <input asp-for="NAsistentes" class="form-control" />
+                        <span asp-validation-for="NAsistentes" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Descripcion" class="control-label"></label>
-                <input asp-for="Descripcion" class="form-control" />
-                <span asp-validation-for="Descripcion" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label class="control-label">Numero de asistentes</label>
-                <input asp-for="NAsistentes" class="form-control" />
-                <span asp-validation-for="NAsistentes" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label class="control-label">Hora y fecha de inicio</label>
-                <input asp-for="HoraInicio" class="form-control" />
-                <span asp-validation-for="HoraInicio" class="text-danger"></span>
-            </div>
-        </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">Hora y fecha de inicio</label>
+                        <input asp-for="HoraInicio" class="form-control" id="horaInicio" />
+                        <span asp-validation-for="HoraInicio" class="text-danger"></span>
+                    </div>
+                </div>
 
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="HoraFin" class="control-label">Hora y fecha de finalizacion</label>
-                <input asp-for="HoraFin" class="form-control" />
-                <span asp-validation-for="HoraInicio" class="text-danger"></span>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="HoraFin" class="control-label">Hora y fecha de finalizacion</label>
+                        <input asp-for="HoraFin" class="form-control" id="horaFin" />
+                        <span asp-validation-for="HoraInicio" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdEspaciosA" class="control-label"></label>
+                        <select asp-for="IdEspaciosA" class="form-control">
+                            <option selected value="">SELECCIONAR</option>
+                            @foreach (var item in espacios)
+                            {
+                                <option value="@item.IdEspaciosA">@item.Nombre</option>
+                            }
+                        </select>
+                        <span asp-validation-for="IdEspaciosA" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="IdEspaciosA" class="control-label"></label>
-                <select asp-for="IdEspaciosA" class="form-control">
-                    <option selected value="">SELECCIONAR</option>
-                    @foreach (var item in espacios)
-                    {
-                        <option value="@item.IdEspaciosA">@item.Nombre</option>
-                    }
-                </select>
-                <span asp-validation-for="IdEspaciosA" class="text-danger"></span>
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">Institucion</label>
+                        <select asp-for="IdInstitucion" class="form-control">
+                            <option selected value="">SELECCIONAR</option>
+                            @foreach (var item in institucion)
+                            {
+                                <option value="@item.IdInstitucion">@item.Nombre</option>
+                            }
+                        </select>
+                        <span asp-validation-for="IdInstitucion" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdCarrera" class="control-label"></label>
+                        <select asp-for="IdCarrera" class="form-control">
+                            <option selected value="">SELECCIONAR</option>
+                            @foreach (var item in carrera)
+                            {
+                                <option value="@item.IdCarrera">@item.Nombre</option>
+                            }
+                        </select>
+                        <span asp-validation-for="IdCarrera" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdUsuario" class="control-label"></label>
+                        <select asp-for="IdUsuario" class="form-control">
+                            <option selected value="">SELECCIONAR</option>
+                            @foreach (var item in usuario)
+                            {
+                                <option value="@item.Id">@item.Nombre</option>
+                            }
+                        </select>
+                        <span asp-validation-for="IdUsuario" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-      
-        <div class="col-md-4">
-            <div class="form-group">
-                <label  class="control-label">Institucion</label>
-                <select asp-for="IdInstitucion" class="form-control">
-                    <option selected value="">SELECCIONAR</option>
-                    @foreach (var item in institucion)
-                    {
-                        <option value="@item.IdInstitucion">@item.Nombre</option>
-                    }
-                </select>
-                <span asp-validation-for="IdInstitucion" class="text-danger"></span>
+
+            @*BOTONES EDITADOS CON ICONOS*@
+
+            <div class="form-group" style="margin-top: 10px;">
+                <button type="submit" class="btn btn-success" style="margin-right: 10px;">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+
+                <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="IdCarrera" class="control-label"></label>
-                <select asp-for="IdCarrera" class="form-control">
-                    <option selected value="">SELECCIONAR</option>
-                    @foreach (var item in carrera)
-                    {
-                        <option value="@item.IdCarrera">@item.Nombre</option>
-                    }
-                </select>
-                <span asp-validation-for="IdCarrera" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="IdUsuario" class="control-label"></label>
-                <select asp-for="IdUsuario" class="form-control">
-                    <option selected value="">SELECCIONAR</option>
-                    @foreach (var item in usuario)
-                    {
-                        <option value="@item.Id">@item.Nombre</option>
-                    }
-                </select>
-                <span asp-validation-for="IdUsuario" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
 
-    @*BOTONES EDITADOS CON ICONOS*@
+            <span class="text-danger">@ViewBag.Error</span>
+        </form>
 
-    <div class="form-group" style="margin-top: 10px;">
-        <button type="submit" class="btn btn-success" style="margin-right: 10px;">
-            <i class="fas fa-save"></i> Guardar
-        </button>
 
-        <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
-            <i class="fas fa-times"></i> Cancelar
-        </button>
-    </div>
-
-    <span class="text-danger">@ViewBag.Error</span>
-
-</form>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script>
+    $(document).ready(function () {
+        $('#horaInicio, #horaFin').change(function () {
+            // Obtener los valores de hora de inicio y fin del formulario
+            var horaInicio = $('#horaInicio').val();
+            var horaFin = $('#horaFin').val();
+
+            // Crear un objeto de evento con las horas seleccionadas
+            var evento = {
+                HoraInicio: horaInicio,
+                HoraFin: horaFin
+            };
+
+            // Realizar una solicitud AJAX para validar las horas del evento
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ValidarHoras", "Evento")',
+                contentType: 'application/json',
+                data: JSON.stringify(evento),
+                success: function (response) {
+                    if (response === true) {
+                        // Si las horas son válidas, no hacer nada
+                        $('#horaInicio, #horaFin').removeClass('is-invalid');
+                    } else {
+                        // Si las horas no son válidas, mostrar un mensaje de error
+                        $('#horaInicio, #horaFin').addClass('is-invalid');
+                        $('#horaInicio').siblings('.text-danger').text('La hora seleccionada se solapa con otra reserva existente.');
+                        $('#horaFin').siblings('.text-danger').text('La hora seleccionada se solapa con otra reserva existente.');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Manejar errores de la solicitud AJAX
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
