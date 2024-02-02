@@ -3,24 +3,21 @@
 }
 
 body {
-	background-image: url('../IMG/ImagenFondo.jpg');
 	margin: 0;
 	padding: 0;
 	font-family: sans-serif;
-	background-size: cover; /* Para asegurarse de que la imagen cubra todo el fondo */
-	background-position: center; /* Para centrar la imagen en el fondo */
-	background-repeat: no-repeat; /* Para que la imagen no se repita */
+	background-image: linear-gradient(to bottom right, #00537c, #3aa6db);
 }
 
 .login-box {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	height: 600px;
-	width: 425px;
+	height: 625px;
+	width: 450px;
 	padding: 50px;
 	transform: translate(-50%, -50%);
-	background: rgba(0,0,0,.8);
+	background: rgba(0,0,0,.6);
 	box-sizing: border-box;
 	box-shadow: 0 15px 25px rgba(0,0,5,.0);
 	border-radius: 10px;
@@ -93,8 +90,6 @@ form {
 	right: 0;
 	transform: translateY(-50%);
 	text-align: center;
-	padding: 5%;
-	margin: 4px
 }
 
 .button-container {
@@ -103,7 +98,7 @@ form {
 
 .btn.wider-button {
 	position: center;
-	background-color: #0f136b;
+	background-color: #3aa6db;
 	height: 40px;
 	width: 200px;
 	font-size: 15px;
@@ -114,8 +109,7 @@ form {
 }
 
 	.btn.wider-button:hover {
-		background-color: #000000; /* Cambia el color al pasar el mouse sobre el botón */
-		color: white;
+		background-color: #00537c; /* Cambia el color al pasar el mouse sobre el botón */
 	}
 
 .btn.regis-button {
@@ -132,11 +126,6 @@ form {
 
 	.btn.regis-button:hover {
 		background-color: #000000; /* Cambia el color al pasar el mouse sobre el botón */
-		color: white;
 	}
 
-, imagenL {
-	height: 100%;
-	width: 100%;
-	margin-bottom: 60%;
-}
+
