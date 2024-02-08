@@ -26,10 +26,13 @@ namespace SysReservacionEventosESFE.EntidadesDeNegocio
         public int? NAsistentes { get; set; }
 
         [Display(Name = "Fecha y Hora de fin")]
-        public DateTime HoraFin { get; set; }
+        public TimeSpan HoraFin { get; set; }
 
         [Display(Name = "Fecha y Hora de inicio")]
-        public DateTime HoraInicio { get; set; }
+        public TimeSpan HoraInicio { get; set; }
+
+        [Display(Name = "Fecha y Hora de inicio")]
+        public DateOnly FechaEvento { get; set; }
 
         [ForeignKey("EspaciosA")]
         [Required(ErrorMessage = "Espacio es obligatorio")]
