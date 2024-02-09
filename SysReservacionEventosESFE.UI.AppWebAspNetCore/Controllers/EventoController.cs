@@ -175,57 +175,62 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             }
         }
 
-        //public async Task<IActionResult> Reserva()
-        //{
-        //    ViewBag.Carrera = await CarreraBL.ObtenerTodosAsync();
-        //    ViewBag.Espacios = await EspaciosABL.ObtenerTodosAsync();
-        //    ViewBag.Usuario = await UsuarioBL.ObtenerTodosAsync();
-        //    ViewBag.Institucion = await InstitucionBL.ObtenerTodosAsync();
+        public async Task<IActionResult> Reserva()
+        {
+            ViewBag.Carrera = await CarreraBL.ObtenerTodosAsync();
+            ViewBag.Espacios = await EspaciosABL.ObtenerTodosAsync();
+            ViewBag.Usuario = await UsuarioBL.ObtenerTodosAsync();
+            ViewBag.Institucion = await InstitucionBL.ObtenerTodosAsync();
 
-        //    ViewBag.Error = "";
-        //    return View();
-        //}
+            ViewBag.Error = "";
+            return View();
+        }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Reserva(Evento pEvento)
-        //{
-            
-        //    try
-        //    {
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Reserva(Evento pEvento,int IdEspaciosA)
+        {
+            try
+            {
+                // Obtener todos los eventos existentes
+                var todosEventos = await EventoBL.ObtenerTodosAsync();
 
-        //        var taskObtenerTodos = await EventoBL.ObtenerTodosAsync();
-    
+                // Verificar si hay algún evento existente con superposición de horas en el mismo lugar y fecha
+                foreach (var evento in todosEventos)
+                {
+                    if (evento.FechaEvento.Date == pEvento.FechaEvento.Date && // Compara solo la fecha sin la hora
+                        evento.EspaciosA.IdEspaciosA == IdEspaciosA && // Compara el nombre del lugar
+                        SeSuperponenHoras(pEvento.HoraInicio, pEvento.HoraFin, evento.HoraInicio, evento.HoraFin))
+                    {
+                        string mensaje = "Las horas seleccionadas se superponen con otro evento en el mismo lugar y fecha. Por favor, elige otras horas.";
 
-        //        foreach (var eventos in taskObtenerTodos)
-        //        {
+                        return ViewBag.Mensaje = mensaje;
+                       
+                    }
+                }
+
+                // Si no hay eventos con superposición de horas en el mismo lugar y fecha, crear el evento
+                int result = await EventoBL.CrearAsync(pEvento);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Carrera = await CarreraBL.ObtenerTodosAsync();
+                ViewBag.Espacios = await EspaciosABL.ObtenerTodosAsync();
+                ViewBag.Usuario = await UsuarioBL.ObtenerTodosAsync();
+                ViewBag.Institucion = await InstitucionBL.ObtenerTodosAsync();
+                ViewBag.Error = ex.Message;
+                return View(pEvento);
+            }
+        }
+
+        // Método para verificar si las horas se superponen
+        private bool SeSuperponenHoras(DateTime horaInicio1, DateTime horaFin1, DateTime horaInicio2, DateTime horaFin2)
+        {
+            return horaInicio1 < horaFin2 && horaFin1 > horaInicio2;
+        }
 
 
-        //            if (pEvento.EspaciosA == eventos.EspaciosA && pEvento.HoraInicio >= eventos.HoraInicio && pEvento.HoraFin <= eventos.HoraFin && pEvento.FechaEvento == eventos.FechaEvento)
-        //            {
-        //                return ViewBag.Error = "La fecha seleccionada ya está reservada. Por favor, elige otra fecha.";
-        //            }
-        //            else
-        //            {
-        //                int result = await EventoBL.CrearAsync(pEvento);
-        //                return RedirectToAction(nameof(Index));
-        //            }
-                   
-        //        }
-        //        return View(pEvento);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ViewBag.Carrera = await CarreraBL.ObtenerTodosAsync();
-        //        ViewBag.Espacios = await EspaciosABL.ObtenerTodosAsync();
-        //        ViewBag.Usuario = await UsuarioBL.ObtenerTodosAsync();
-        //        ViewBag.Institucion = await InstitucionBL.ObtenerTodosAsync();
-        //        ViewBag.Error = ex.Message;
-        //        return View(pEvento);
-
-
-        //    }
-        //}
 
 
     }

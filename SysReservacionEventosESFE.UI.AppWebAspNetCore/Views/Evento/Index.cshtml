@@ -168,7 +168,7 @@
                             <i class="fas fa-search"></i> Buscar
                         </button>
 
-                        <button type="button" class="btn btn-success" onclick="window.location.href='@Url.Action("Create")'">
+                        <button type="button" class="btn btn-success" onclick="window.location.href='@Url.Action("Reserva")'">
                             <i class="fas fa-plus"></i> Agregar
                         </button>
 
@@ -180,14 +180,10 @@
             </div>
         </div>
     </div>
-    <div style="width: 48%;">
-        <h2>Calendario</h2>
-        <div id="calendario" style="max-width: 300px; margin: 20px auto;"></div>
-
-    </div>
+   
 </div>
 
-<table class="table table-responsive paginationjs">
+<table class="table table-responsive paginationjs" style="margin-left:-5%">
     <thead>
         <tr>
 
@@ -204,6 +200,10 @@
 
             <th>
                 Numero de asistentes
+            </th>
+
+             <th>
+                Fecha del evento
             </th>
 
             <th>
@@ -246,7 +246,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.NAsistentes)
                 </td>
-
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaEvento)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.HoraInicio)
                 </td>

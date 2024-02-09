@@ -25,14 +25,20 @@ namespace SysReservacionEventosESFE.EntidadesDeNegocio
         [Required(ErrorMessage = "Numero de asistentes es obligatorio")]
         public int? NAsistentes { get; set; }
 
-        [Display(Name = "Fecha y Hora de fin")]
-        public TimeSpan HoraFin { get; set; }
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:hh:mm tt}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Hora de inicio")]
+        public DateTime HoraInicio { get; set; }
 
-        [Display(Name = "Fecha y Hora de inicio")]
-        public TimeSpan HoraInicio { get; set; }
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:hh:mm tt}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Hora de fin")]
+        public DateTime HoraFin { get; set; }
 
-        [Display(Name = "Fecha y Hora de inicio")]
-        public DateOnly FechaEvento { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Fecha del evento")]
+        public DateTime FechaEvento { get; set; }
 
         [ForeignKey("EspaciosA")]
         [Required(ErrorMessage = "Espacio es obligatorio")]

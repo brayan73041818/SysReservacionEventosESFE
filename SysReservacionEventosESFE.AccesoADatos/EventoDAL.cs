@@ -61,12 +61,12 @@ namespace SysReservacionEventosESFE.AccesoADatos
             }
             return Evento;
         }
-        public static async Task<List<Evento>>? ObtenerTodosAsync()
+        public static async Task<List<Evento>> ObtenerTodosAsync()
         {
             var Eventos = new List<Evento>();
             using (var bdContexto = new BDContexto())
             {
-                Eventos = await bdContexto.Evento.ToListAsync();
+                Eventos = await bdContexto.Evento.Include(s => s.EspaciosA).ToListAsync();
             }
             return Eventos;
         }
