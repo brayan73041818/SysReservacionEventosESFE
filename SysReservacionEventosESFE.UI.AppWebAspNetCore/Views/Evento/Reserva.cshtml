@@ -122,7 +122,7 @@
     @*BOTONES EDITADOS CON ICONOS*@
 
     <div class="form-group" style="margin-top: 10px;">
-        <button type="submit" class="btn btn-success" style="margin-right: 10px;">
+        <button type="submit" class="btn btn-success" style="margin-right: 10px;" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">
             <i class="fas fa-save"></i> Guardar
         </button>
 
@@ -145,4 +145,40 @@
     }
 }
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <!-- Puedes cambiar 'modal-lg' por 'modal-sm' o personalizar el tamaño según tus necesidades -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Título del Modal
+                </h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Contenido del cuerpo del modal -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal"> Cerrar </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var exampleModal = document.getElementById('exampleModal');
+    exampleModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var recipient = button.getAttribute('data-bs-whatever');
+
+        $.get('/YaReservado', function (data) {
+            var modalTitle = exampleModal.querySelector('.modal-title');
+            modalTitle.textContent = 'YaReservado' + recipient;
+
+            var modalBody = exampleModal.querySelector('.modal-body');
+            modalBody.innerHTML = data;
+        });
+    });
+</script>
 

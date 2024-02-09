@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Calendario";
+}
+<link href='fullcalendar/main.css' rel='stylesheet' />
+    <script src='lib/jquery/jquery.min.js'></script>
+    <script src='fullcalendar/main.js'></script>
+
+<div id='calendar'></div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: '/Event/GetEvents' // Esta es la ruta de tu controlador que devolverá los eventos
+            });
+
+            calendar.render();
+        });
+
+      
+    </script>
+}
