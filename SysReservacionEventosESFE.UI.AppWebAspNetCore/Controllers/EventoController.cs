@@ -204,8 +204,12 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
                     {
                         string mensaje = "Las horas seleccionadas se superponen con otro evento en el mismo lugar y fecha. Por favor, elige otras horas.";
 
-                        return ViewBag.Mensaje = mensaje;
-                       
+                        ViewBag.Mensaje = mensaje;
+
+                        // Devolver la vista con el mensaje de error
+                        return RedirectToAction("YaReservado");
+
+
                     }
                 }
 
@@ -230,7 +234,12 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             return horaInicio1 < horaFin2 && horaFin1 > horaInicio2;
         }
 
-
+        [HttpGet("YaReservado")]
+        public async Task<IActionResult> YaReservado()
+        {
+    
+            return View();
+        }
 
 
     }

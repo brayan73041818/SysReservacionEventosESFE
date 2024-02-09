@@ -131,8 +131,10 @@
         </button>
     </div>
 
-    <span class="text-danger">@ViewBag.Error</span>
-        <span class="text-danger">@ViewBag.Mensaje</span>
+    @if (ViewBag.Mensaje != null)
+    {
+        <p style="color: red;">@ViewBag.Mensaje</p>
+    }
 
 </form>
 
