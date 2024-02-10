@@ -41,14 +41,21 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label class="control-label">Hora y fecha de inicio</label>
+                <label class="control-label">Fecha de evento</label>
+                <input asp-for="FechaEvento" class="form-control" />
+                <span asp-validation-for="FechaEvento" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">Hora de inicio</label>
                 <input asp-for="HoraInicio" class="form-control" />
                 <span asp-validation-for="HoraInicio" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label asp-for="HoraFin" class="control-label">Hora y fecha de finalizacion</label>
+                <label asp-for="HoraFin" class="control-label">Hora de finalizacion</label>
                 <input asp-for="HoraFin" class="form-control" />
                 <span asp-validation-for="HoraInicio" class="text-danger"></span>
             </div>
@@ -99,7 +106,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="IdEspaciosA" class="control-label"></label>
-                <select asp-for="IdEspaciosA" class="form-control">
+                <select asp-for="IdEspaciosA" name="IdEspaciosA" class="form-control">
                     <option selected value="">SELECCIONAR</option>
                     @foreach (var item in espacios)
                     {

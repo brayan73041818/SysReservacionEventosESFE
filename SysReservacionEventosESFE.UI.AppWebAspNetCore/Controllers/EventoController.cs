@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using SysReservacionEventosESFE.EntidadesDeNegocio;
 using SysReservacionEventosESFE.LogicaDeNegocio;
+using SysReservacionEventosESFE.UI.AppWebAspNetCore.Models;
 
 namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
 {
@@ -25,7 +26,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
 
 
         // GET: EventoController
-        public async Task<IActionResult> Index(Evento pEvento = null)
+        public async Task<IActionResult> Index(DateTime fInicio, DateTime fFinal, Evento pEvento = null)
         {
             if (pEvento == null)
                 pEvento = new Evento();
@@ -44,6 +45,14 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             ViewBag.Usuario = await taskObtenerTodosU;
             ViewBag.Institucion = await taskObtenerTodosI;
             ViewBag.Top = pEvento.Top_Aux;
+            if (fInicio.Year != 1 && fFinal.Year != 1)
+            {
+                ViewBag.Evento = Eventos.Where(r => r.FechaEvento.Date >= fInicio.Date && r.FechaEvento.Date <= fFinal.Date).ToList();
+            }
+            else
+            {
+                ViewBag.Evento = Eventos;
+            }
             return View(Eventos);
         }
 
@@ -115,20 +124,45 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
         // POST: EventoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int IdEvento, Evento pEvento)
+        public async Task<IActionResult> Edit(int IdEvento, Evento pEvento,int IdEspaciosA)
         {
             try
             {
+                // Obtener todos los eventos existentes
+                var todosEventos = await EventoBL.ObtenerTodosAsync();
+
+                // Verificar si hay algún evento existente con superposición de horas en el mismo lugar y fecha
+                foreach (var evento in todosEventos)
+                {
+                    if (evento.FechaEvento.Date == pEvento.FechaEvento.Date && // Compara solo la fecha sin la hora
+                        evento.EspaciosA.IdEspaciosA == IdEspaciosA && // Compara el nombre del lugar
+                        SeSuperponenHoras(pEvento.HoraInicio, pEvento.HoraFin, evento.HoraInicio, evento.HoraFin))
+                    {
+                        string mensaje = "Las horas seleccionadas se superponen con otro evento en el mismo lugar y fecha. Por favor, elige otras horas.";
+
+                        ViewBag.Mensaje = mensaje;
+
+                        // Devolver la vista con el mensaje de error
+                        return RedirectToAction(nameof(YaReservado));
+
+
+
+                    }
+                }
+
+
+                pEvento.IdUsuario = global.idu;
+
                 int result = await EventoBL.ModificarAsync(pEvento);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
-                ViewBag.Error = ex.Message;
                 ViewBag.Carrera = await CarreraBL.ObtenerTodosAsync();
                 ViewBag.Espacios = await EspaciosABL.ObtenerTodosAsync();
                 ViewBag.Usuario = await UsuarioBL.ObtenerTodosAsync();
                 ViewBag.Institucion = await InstitucionBL.ObtenerTodosAsync();
+                ViewBag.Error = ex.Message;
                 return View(pEvento);
             }
         }
@@ -207,13 +241,16 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
                         ViewBag.Mensaje = mensaje;
 
                         // Devolver la vista con el mensaje de error
-                        return RedirectToAction("YaReservado");
+                        return RedirectToAction(nameof(YaReservado));
+
 
 
                     }
                 }
 
-                // Si no hay eventos con superposición de horas en el mismo lugar y fecha, crear el evento
+               
+                pEvento.IdUsuario = global.idu;
+
                 int result = await EventoBL.CrearAsync(pEvento);
                 return RedirectToAction(nameof(Index));
             }
@@ -234,7 +271,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             return horaInicio1 < horaFin2 && horaFin1 > horaInicio2;
         }
 
-        [HttpGet("YaReservado")]
+     
         public async Task<IActionResult> YaReservado()
         {
     
