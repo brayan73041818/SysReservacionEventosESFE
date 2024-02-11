@@ -14,7 +14,6 @@ using SysReservacionEventosESFE.UI.AppWebAspNetCore.Models;
 
 namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
 {
-    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
 
     public class EventoController : Controller
     {

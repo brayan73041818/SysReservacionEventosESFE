@@ -1,10 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SysReservacionEventosESFE.EntidadesDeNegocio;
 using SysReservacionEventosESFE.LogicaDeNegocio;
+using System.Data;
 
 namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
 {
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+    [Authorize(Roles = "Administrador")]
     public class EspaciosAController : Controller
     {
         EspaciosABL EspaciosABL = new EspaciosABL();

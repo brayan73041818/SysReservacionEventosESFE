@@ -13,8 +13,8 @@ using SysReservacionEventosESFE.LogicaDeNegocio;
 
 namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
 {
-    //[Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    //[Authorize(Roles = "Administrador")]
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+    [Authorize(Roles = "Administrador")]
     public class RolController : Controller
     {
         RolBL rolBL = new RolBL();

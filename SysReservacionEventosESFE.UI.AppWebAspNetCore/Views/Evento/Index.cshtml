@@ -153,10 +153,18 @@
                 <i class="fas fa-search"></i> Buscar
             </button>
 
-            <button type="button" class="btn btn-success" onclick="window.location.href='@Url.Action("Reserva")'">
-                <i class="fas fa-plus"></i> Agregar
+            @if (User.IsInRole("Administrador"))
+            {
+                <button type="button" class="btn btn-success" onclick="window.location.href='@Url.Action("Reserva")'">
+                    <i class="fas fa-plus"></i> Agregar
             </button>
-
+            }
+            @if (User.IsInRole("Maestro"))
+            {
+                <button type="button" class="btn btn-success" onclick="window.location.href='@Url.Action("Reserva")'">
+                    <i class="fas fa-plus"></i> Agregar
+                </button>
+            }
 
 
         </div>
@@ -446,21 +454,37 @@
                 <div class="customer-name">Fecha: @item.FechaEvento.ToString("dd/MM/yyyy")</div>
                 <div class="customer-name">Inicio: @item.HoraInicio.ToString("hh:mm tt")</div>
                 <div class="customer-name">Fin: @item.HoraFin.ToString("hh:mm tt")</div>
+                <div class="customer-name">Descripcion: @item.Descripcion</div>
                 <div class="customer-name">Carrera: @item.Carrera.Nombre</div>
                 <div class="customer-name">Espacio: @item.EspaciosA.Nombre</div>
           
 
             </div>
             <div class="customer-buttons">
-                <button type="button" class="btn btn-primary" style="background-color: #264DA0; color: white" onclick="window.location.href='@Url.Action("Edit", new { IdEvento = item.IdEvento })'">
-                    <i class="fas fa-pencil-alt"></i> Modificar
-                </button>               
-                <button type="button" class="btn btn-info"  onclick="window.location.href='@Url.Action("Details", new { IdEvento = item.IdEvento })'">
-                    <i class="fas fa-eye"></i> Detalles
+                @if (User.IsInRole("Administrador"))
+                {
+                    <button type="button" class="btn btn-primary" style="background-color: #264DA0; color: white" onclick="window.location.href='@Url.Action("Edit", new { IdEvento = item.IdEvento })'">
+                        <i class="fas fa-pencil-alt"></i> Modificar
+                    </button>               
+                    <button type="button" class="btn btn-info"  onclick="window.location.href='@Url.Action("Details", new { IdEvento = item.IdEvento })'">
+                        <i class="fas fa-eye"></i> Detalles
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Delete", new { IdEvento= item.IdEvento})'">
+                        <i class="fas fa-trash"></i> Eliminar
                 </button>
-                <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Delete", new { IdEvento= item.IdEvento})'">
-                    <i class="fas fa-trash"></i> Eliminar
-                </button>
+                }
+                @if (User.IsInRole("Maestro"))
+                {
+                    <button type="button" class="btn btn-primary" style="background-color: #264DA0; color: white" onclick="window.location.href='@Url.Action("Edit", new { IdEvento = item.IdEvento })'">
+                        <i class="fas fa-pencil-alt"></i> Modificar
+                    </button>
+                    <button type="button" class="btn btn-info" onclick="window.location.href='@Url.Action("Details", new { IdEvento = item.IdEvento })'">
+                        <i class="fas fa-eye"></i> Detalles
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Delete", new { IdEvento= item.IdEvento})'">
+                        <i class="fas fa-trash"></i> Eliminar
+                    </button>
+                }
             </div>
         </div>
     }
