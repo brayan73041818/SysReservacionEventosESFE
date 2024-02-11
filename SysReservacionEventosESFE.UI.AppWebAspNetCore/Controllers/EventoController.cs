@@ -219,10 +219,9 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             ViewBag.Error = "";
             return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Reserva(Evento pEvento,int IdEspaciosA)
+        public async Task<IActionResult> Reserva(Evento pEvento, int IdEspaciosA)
         {
             try
             {
@@ -236,26 +235,19 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
                         evento.EspaciosA.IdEspaciosA == IdEspaciosA && // Compara el nombre del lugar
                         SeSuperponenHoras(pEvento.HoraInicio, pEvento.HoraFin, evento.HoraInicio, evento.HoraFin))
                     {
-                        string mensaje = "Las horas seleccionadas se superponen con otro evento en el mismo lugar y fecha. Por favor, elige otras horas.";
-
-                        ViewBag.Mensaje = mensaje;
-
-                        // Devolver la vista con el mensaje de error
+                        // Si hay superposición de horas, devolver la vista con el mensaje de error
                         return RedirectToAction(nameof(YaReservado));
-
-
-
                     }
                 }
 
-               
+                // Si no hay superposición de horas, guardar el evento
                 pEvento.IdUsuario = global.idu;
-
                 int result = await EventoBL.CrearAsync(pEvento);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
+                // Manejar excepciones
                 ViewBag.Carrera = await CarreraBL.ObtenerTodosAsync();
                 ViewBag.Espacios = await EspaciosABL.ObtenerTodosAsync();
                 ViewBag.Usuario = await UsuarioBL.ObtenerTodosAsync();
@@ -265,10 +257,11 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             }
         }
 
+
         // Método para verificar si las horas se superponen
         private bool SeSuperponenHoras(DateTime horaInicio1, DateTime horaFin1, DateTime horaInicio2, DateTime horaFin2)
         {
-            return horaInicio1 < horaFin2 && horaFin1 > horaInicio2;
+            return horaInicio1 < horaFin2 && horaFin1 > horaInicio2 ;
         }
 
      

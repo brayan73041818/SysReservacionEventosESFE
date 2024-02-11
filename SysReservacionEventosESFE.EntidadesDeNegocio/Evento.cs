@@ -15,11 +15,11 @@ namespace SysReservacionEventosESFE.EntidadesDeNegocio
         public int IdEvento { get; set; }
 
         [Required(ErrorMessage = "Responsable es obligatorio")]
-        [StringLength(30, ErrorMessage = "Maximo 100 caracteres")]
+        [StringLength(100, ErrorMessage = "Maximo 100 caracteres")]
         public string? Responsable { get; set; }
 
         [Required(ErrorMessage = "Nombre es obligatorio")]
-        [StringLength(30, ErrorMessage = "Maximo 100 caracteres")]
+        [StringLength(250, ErrorMessage = "Maximo 100 caracteres")]
         public string? Descripcion { get; set; }
 
         [Required(ErrorMessage = "Numero de asistentes es obligatorio")]
