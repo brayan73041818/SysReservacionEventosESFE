@@ -19,7 +19,7 @@ using SysReservacionEventosESFE.LogicaDeNegocio;
 namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 {
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    [Authorize(Roles = "Administrador")]
+ 
     public class UsuarioController : Controller
     {
         UsuarioBL usuarioBL = new UsuarioBL();
@@ -44,6 +44,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
             return View(usuarios);
         }
 
+  
         // GET: UsuarioController/Details/5
         public async Task<IActionResult> Details(int Id)
         {
@@ -52,6 +53,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
             return View(usuario);
         }
 
+        
         // GET: UsuarioController/Create
         [AllowAnonymous]
         public async Task<IActionResult> Create()
@@ -166,6 +168,8 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
                     global.idu = usuario.Id;
+                    global.idr = usuario.IdRol;
+
                 }
                 else
                     throw new Exception("Credenciales incorrectas");

@@ -88,6 +88,9 @@
                 @if (User.IsInRole("Maestro"))
                 {
                     <li class="nav-item">
+                        <a class="dashboard-nav-dropdown-item" asp-area="" asp-controller="Usuario" asp-action="Index">Usuario</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="dashboard-nav-dropdown-item" asp-area="" asp-controller="Evento" asp-action="Index">Evento</a>
                     </li>
                     <li class="nav-item">

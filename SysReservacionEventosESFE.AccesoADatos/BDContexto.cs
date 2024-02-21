@@ -17,6 +17,8 @@ namespace SysReservacionEventosESFE.AccesoADatos
         public DbSet<Carrera> Carrera { get; set; }
         public DbSet<Institucion> Institucion { get; set; }
         public DbSet<Evento> Evento { get; set; }
+        public DbSet<Accesos> Accesos { get; set; }
+        public DbSet<RolAccesos> RolAccesos { get; set; }
         public DbSet<EspaciosA> EspaciosA { get; set; }
 
 
@@ -24,7 +26,6 @@ namespace SysReservacionEventosESFE.AccesoADatos
 
 
         {
-            //optionsBuilder.UseSqlServer(@"workstation id=SysInventarioFacturacion503.mssql.somee.com;packet size=4096;user id=romerooscar_SQLLogin_1;pwd=awaosafn8m;data source=SysInventarioFacturacion503.mssql.somee.com;persist security info=False;initial catalog=SysInventarioFacturacion503;Encrypt=False;TrustServerCertificate=False;");
 
             optionsBuilder.UseSqlServer(@"workstation id=SysReservacionesEsfe.mssql.somee.com;packet size=4096;user id=JavierGarcia_SQLLogin_1;pwd=aibjbvtba6;data source=SysReservacionesEsfe.mssql.somee.com;persist security info=False;initial catalog=SysReservacionesEsfe;Encrypt=False;TrustServerCertificate=False;");
         }
