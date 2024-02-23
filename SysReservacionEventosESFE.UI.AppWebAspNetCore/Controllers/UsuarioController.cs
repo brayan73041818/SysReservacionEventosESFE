@@ -27,6 +27,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 
         public static int idUserV = 0;
 
+        [AuthorizeUser(IdAcceso:1)]
         // GET: UsuarioController
         public async Task<IActionResult> Index(Usuario pUsuario = null)
         {

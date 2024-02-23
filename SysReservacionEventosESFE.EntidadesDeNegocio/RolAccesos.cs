@@ -12,7 +12,7 @@ namespace SysReservacionEventosESFE.EntidadesDeNegocio
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdRolAccesos { get; set; }
+        public int IdRolAcceso { get; set; }
 
         public Rol Rol { get; set; }
         [ForeignKey("Rol")]
@@ -25,7 +25,7 @@ namespace SysReservacionEventosESFE.EntidadesDeNegocio
         [ForeignKey("Accesos")]
         [Required(ErrorMessage = "Accesos es obligatorio")]
         [Display(Name = "Accesos")]
-        public int IdAccesos  { get; set; }
+        public int IdAcceso  { get; set; }
 
         [NotMapped]
         public int Top_Aux { get; set; }
