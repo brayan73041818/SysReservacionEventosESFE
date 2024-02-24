@@ -15,59 +15,6 @@
 
 
 }
-<style>
-    .customer-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    .customer-card {
-        width: 48%; /* Cambiado el ancho para dejar espacio entre las cartas */
-        height: auto;
-        margin-top: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
-    }
-
-    .customer-details {
-        padding: 20px;
-        border-bottom: 1px solid #ddd;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .customer-name {
-        font-size: 1.2em;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-
-    .customer-buttons {
-        display: flex;
-        justify-content: center;
-        padding: 20px;
-    }
-
-        .customer-buttons button {
-            margin-left: 10px;
-        }
-
-
-    .customer-heading {
-        background-color: #333;
-        color: #fff;
-        padding: 10px;
-        text-align: center;
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
-    }
-</style>
-
-
 
 
 <h1>Buscar</h1>
@@ -461,8 +408,8 @@
 
             </div>
             <div class="customer-buttons">
-                @if (User.IsInRole("Administrador"))
-                {
+               
+                
                     <button type="button" class="btn btn-primary" style="background-color: #264DA0; color: white" onclick="window.location.href='@Url.Action("Edit", new { IdEvento = item.IdEvento })'">
                         <i class="fas fa-pencil-alt"></i> Modificar
                     </button>               
@@ -472,19 +419,8 @@
                     <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Delete", new { IdEvento= item.IdEvento})'">
                         <i class="fas fa-trash"></i> Eliminar
                 </button>
-                }
-                @if (User.IsInRole("Maestro"))
-                {
-                    <button type="button" class="btn btn-primary" style="background-color: #264DA0; color: white" onclick="window.location.href='@Url.Action("Edit", new { IdEvento = item.IdEvento })'">
-                        <i class="fas fa-pencil-alt"></i> Modificar
-                    </button>
-                    <button type="button" class="btn btn-info" onclick="window.location.href='@Url.Action("Details", new { IdEvento = item.IdEvento })'">
-                        <i class="fas fa-eye"></i> Detalles
-                    </button>
-                    <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Delete", new { IdEvento= item.IdEvento})'">
-                        <i class="fas fa-trash"></i> Eliminar
-                    </button>
-                }
+                
+         
             </div>
         </div>
     }

@@ -12,7 +12,7 @@ namespace SysReservacionEventosESFE.EntidadesDeNegocio
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdAccesos { get; set; }
+        public int IdAcceso { get; set; }
         [Required(ErrorMessage = "Nombre es obligatorio")]
         [StringLength(30, ErrorMessage = "Maximo 30 caracteres")]
         public string? Nombre { get; set; }

@@ -34,7 +34,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.ContAccesoslers
         // GET: AccesosContAccesosler/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            var Accesos = await AccesosBL.ObtenerPorIdAsync(new Accesos { IdAccesos = id });
+            var Accesos = await AccesosBL.ObtenerPorIdAsync(new Accesos { IdAcceso = id });
             return View(Accesos);
         }
 

@@ -35,6 +35,11 @@ namespace SysReservacionEventosESFE.LogicaDeNegocio
         {
             return await RolAccesosDAL.BuscarAsync(pRolAccesos);
         }
+        public async Task<List<RolAccesos>> BuscarIncluirAccesoYRolAsync(RolAccesos pRolAccesos)
+        {
+            return await RolAccesosDAL.BuscarIncluirAccesoYRolAsync(pRolAccesos);
+
+        }
     }
 }
 

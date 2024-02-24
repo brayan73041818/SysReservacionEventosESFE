@@ -26,7 +26,7 @@ namespace SysReservacionEventosESFE.AccesoADatos
             int result = 0;
             using (var bdContexto = new BDContexto())
             {
-                var RolAccesos = await bdContexto.RolAccesos.FirstOrDefaultAsync(s => s.IdRolAccesos == pRolAccesos.IdRolAccesos);
+                var RolAccesos = await bdContexto.RolAccesos.FirstOrDefaultAsync(s => s.IdRolAcceso == pRolAccesos.IdRolAcceso);
                 bdContexto.Update(RolAccesos);
                 result = await bdContexto.SaveChangesAsync();
             }
@@ -37,7 +37,7 @@ namespace SysReservacionEventosESFE.AccesoADatos
             int result = 0;
             using (var bdContexto = new BDContexto())
             {
-                var RolAccesos = await bdContexto.RolAccesos.FirstOrDefaultAsync(s => s.IdRolAccesos == pRolAccesos.IdRolAccesos);
+                var RolAccesos = await bdContexto.RolAccesos.FirstOrDefaultAsync(s => s.IdRolAcceso == pRolAccesos.IdRolAcceso);
                 bdContexto.RolAccesos.Remove(RolAccesos);
                 result = await bdContexto.SaveChangesAsync();
             }
@@ -48,7 +48,7 @@ namespace SysReservacionEventosESFE.AccesoADatos
             var RolAccesos = new RolAccesos();
             using (var bdContexto = new BDContexto())
             {
-                RolAccesos = await bdContexto.RolAccesos.FirstOrDefaultAsync(s => s.IdRolAccesos == pRolAccesos.IdRolAccesos);
+                RolAccesos = await bdContexto.RolAccesos.FirstOrDefaultAsync(s => s.IdRolAcceso == pRolAccesos.IdRolAcceso);
             }
             return RolAccesos;
         }
@@ -63,9 +63,13 @@ namespace SysReservacionEventosESFE.AccesoADatos
         }
         internal static IQueryable<RolAccesos> QuerySelect(IQueryable<RolAccesos> pQuery, RolAccesos pRolAccesos)
         {
-            if (pRolAccesos.IdRolAccesos > 0)
-                pQuery = pQuery.Where(s => s.IdRolAccesos == pRolAccesos.IdRolAccesos);
-            pQuery = pQuery.OrderByDescending(s => s.IdRolAccesos).AsQueryable();
+            if (pRolAccesos.IdRolAcceso > 0)
+                pQuery = pQuery.Where(s => s.IdRolAcceso == pRolAccesos.IdRolAcceso);
+            if (pRolAccesos.IdRol > 0)
+                pQuery = pQuery.Where(s => s.IdRol == pRolAccesos.IdRol);
+            if (pRolAccesos.IdAcceso > 0)
+                pQuery = pQuery.Where(s => s.IdAcceso == pRolAccesos.IdAcceso);
+            pQuery = pQuery.OrderByDescending(s => s.IdRolAcceso).AsQueryable();
             if (pRolAccesos.Top_Aux > 0)
                 pQuery = pQuery.Take(pRolAccesos.Top_Aux).AsQueryable();
             return pQuery;
@@ -80,6 +84,18 @@ namespace SysReservacionEventosESFE.AccesoADatos
                 RolAccesoses = await select.ToListAsync();
             }
             return RolAccesoses;
+        }
+
+        public static async Task<List<RolAccesos>> BuscarIncluirAccesoYRolAsync(RolAccesos pRolAccesos)
+        {
+            var RolAccesos = new List<RolAccesos>();
+            using (var bdContexto = new BDContexto())
+            {
+                var select = bdContexto.RolAccesos.AsQueryable();
+                select = QuerySelect(select, pRolAccesos).Include(s => s.Accesos).Include(s => s.Rol).AsQueryable();
+                RolAccesos = await select.ToListAsync();
+            }
+            return RolAccesos;
         }
     }
 }

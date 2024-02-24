@@ -26,7 +26,7 @@ namespace SysReservacionEventosESFE.AccesoADatos
             int result = 0;
             using (var bdContexto = new BDContexto())
             {
-                var Accesos = await bdContexto.Accesos.FirstOrDefaultAsync(s => s.IdAccesos == pAccesos.IdAccesos);
+                var Accesos = await bdContexto.Accesos.FirstOrDefaultAsync(s => s.IdAcceso == pAccesos.IdAcceso);
                 Accesos.Nombre = pAccesos.Nombre;
                 bdContexto.Update(Accesos);
                 result = await bdContexto.SaveChangesAsync();
@@ -38,7 +38,7 @@ namespace SysReservacionEventosESFE.AccesoADatos
             int result = 0;
             using (var bdContexto = new BDContexto())
             {
-                var Accesos = await bdContexto.Accesos.FirstOrDefaultAsync(s => s.IdAccesos == pAccesos.IdAccesos);
+                var Accesos = await bdContexto.Accesos.FirstOrDefaultAsync(s => s.IdAcceso == pAccesos.IdAcceso);
                 bdContexto.Accesos.Remove(Accesos);
                 result = await bdContexto.SaveChangesAsync();
             }
@@ -49,7 +49,7 @@ namespace SysReservacionEventosESFE.AccesoADatos
             var Accesos = new Accesos();
             using (var bdContexto = new BDContexto())
             {
-                Accesos = await bdContexto.Accesos.FirstOrDefaultAsync(s => s.IdAccesos == pAccesos.IdAccesos);
+                Accesos = await bdContexto.Accesos.FirstOrDefaultAsync(s => s.IdAcceso == pAccesos.IdAcceso);
             }
             return Accesos;
         }
@@ -64,11 +64,11 @@ namespace SysReservacionEventosESFE.AccesoADatos
         }
         internal static IQueryable<Accesos> QuerySelect(IQueryable<Accesos> pQuery, Accesos pAccesos)
         {
-            if (pAccesos.IdAccesos > 0)
-                pQuery = pQuery.Where(s => s.IdAccesos == pAccesos.IdAccesos);
+            if (pAccesos.IdAcceso > 0)
+                pQuery = pQuery.Where(s => s.IdAcceso == pAccesos.IdAcceso);
             if (!string.IsNullOrWhiteSpace(pAccesos.Nombre))
                 pQuery = pQuery.Where(s => s.Nombre.Contains(pAccesos.Nombre));
-            pQuery = pQuery.OrderByDescending(s => s.IdAccesos).AsQueryable();
+            pQuery = pQuery.OrderByDescending(s => s.IdAcceso).AsQueryable();
             if (pAccesos.Top_Aux > 0)
                 pQuery = pQuery.Take(pAccesos.Top_Aux).AsQueryable();
             return pQuery;

@@ -19,7 +19,7 @@ using SysReservacionEventosESFE.LogicaDeNegocio;
 namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 {
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
- 
+   
     public class UsuarioController : Controller
     {
         UsuarioBL usuarioBL = new UsuarioBL();
@@ -27,7 +27,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 
         public static int idUserV = 0;
 
-        [AuthorizeUser(IdAcceso:1)]
+        [AuthorizeUser(IdAcceso: 1)]
         // GET: UsuarioController
         public async Task<IActionResult> Index(Usuario pUsuario = null)
         {

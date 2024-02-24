@@ -1,0 +1,97 @@
+﻿@model SysReservacionEventosESFE.EntidadesDeNegocio.RolAccesos
+
+@{
+    ViewData["Title"] = "Create";
+    List<SysReservacionEventosESFE.EntidadesDeNegocio.Rol> rol = ViewBag.Rol as List<SysReservacionEventosESFE.EntidadesDeNegocio.Rol>;
+    List<SysReservacionEventosESFE.EntidadesDeNegocio.Accesos> accesos = ViewBag.Accesos as List<SysReservacionEventosESFE.EntidadesDeNegocio.Accesos>;
+}
+
+<h1>Create</h1>
+
+<h4>RolAccesos</h4>
+<hr />
+<style>
+    /* Estilo personalizado para las casillas de verificación */
+    .custom-checkbox .form-check-input[type="checkbox"] {
+        width: 1.2em;
+        height: 1.2em;
+        background-color: #fff;
+        border: 2px solid #4CAF50; /* Color del borde */
+        border-radius: 3px;
+        transition: all 0.3s ease;
+    }
+
+        .custom-checkbox .form-check-input[type="checkbox"]:checked {
+            background-color: #4CAF50; /* Color de fondo cuando está marcada */
+        }
+
+        .custom-checkbox .form-check-input[type="checkbox"]:hover {
+            cursor: pointer;
+        }
+
+    .custom-checkbox .form-check-label {
+        margin-left: 5px; /* Espacio entre la casilla de verificación y la etiqueta */
+    }
+
+    /* Estilo para el contenedor con scroll */
+    .checkbox-container {
+        max-height: 40px; /* Altura máxima del contenedor */
+        overflow-y: auto; /* Agrega desplazamiento vertical si es necesario */
+        border: 1px solid #ccc; /* Borde para el contenedor */
+        border-radius: 5px;
+        padding: 5px; /* Espaciado interno */
+    }
+</style>
+<form asp-action="Create">
+    <!-- Tu formulario aquí -->
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label name="Rol" class="control-label">Rol</label>
+                <input name="Rol" class="form-control" />
+                <span asp-validation-for="Rol" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">Acceso</label>
+                <div class="checkbox-container">
+                    @foreach (var item in accesos)
+                    {
+                        <div class="form-check custom-checkbox">
+                            <input type="checkbox" class="form-check-input" id="acceso_@item.IdAcceso" name="Acceso" value="@item.IdAcceso">
+                            <label class="form-check-label" for="acceso_@item.IdAcceso">@item.Nombre</label>
+                        </div>
+                    }
+                </div>
+                <span asp-validation-for="IdAcceso" class="text-danger"></span>
+            </div>
+        </div>
+
+    </div>
+
+    @*BOTONES EDITADOS CON ICONOS*@
+
+    <div class="form-group" style="margin-top: 10px;">
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-save"></i> Guardar
+        </button>
+
+        <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
+            <i class="fas fa-times"></i> Cancelar
+        </button>
+    </div>
+
+
+
+</form>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
