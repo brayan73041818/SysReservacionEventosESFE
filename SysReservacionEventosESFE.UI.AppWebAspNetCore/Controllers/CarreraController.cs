@@ -10,15 +10,18 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using SysReservacionEventosESFE.EntidadesDeNegocio;
 using SysReservacionEventosESFE.LogicaDeNegocio;
+using SysReservacionEventosESFE.UI.AppWebAspNetCore.Models;
 
 namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
 {
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    [Authorize(Roles = "Administrador")]
     public class CarreraController : Controller
     {
         CarreraBL carreraBL = new CarreraBL();
+
         // GET: RolController
+        [AuthorizeUser(IdAcceso: 4)]
+
         public async Task<IActionResult> Index(Carrera pCarrera = null)
         {
             if (pCarrera == null)

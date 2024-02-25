@@ -4,21 +4,25 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
 /********************************/
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using SysReservacionEventosESFE.EntidadesDeNegocio;
 using SysReservacionEventosESFE.LogicaDeNegocio;
+using SysReservacionEventosESFE.UI.AppWebAspNetCore.Models;
+
 
 namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
 {
-    //[Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    //[Authorize(Roles = "Administrador")]
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
     public class RolController : Controller
     {
+
         RolBL rolBL = new RolBL();
         // GET: RolController
+        [AuthorizeUser(IdAcceso: 2)]
         public async Task<IActionResult> Index(Rol pRol = null)
         {
             if (pRol == null)

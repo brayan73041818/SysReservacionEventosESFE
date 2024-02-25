@@ -10,15 +10,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using SysReservacionEventosESFE.EntidadesDeNegocio;
 using SysReservacionEventosESFE.LogicaDeNegocio;
+using SysReservacionEventosESFE.UI.AppWebAspNetCore.Models;
 
 namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
 {
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    [Authorize(Roles = "Administrador")]
     public class InstitucionController : Controller
     {
         InstitucionBL InstitucionBL = new InstitucionBL();
         // GET: InstitucionController
+        [AuthorizeUser(IdAcceso: 5)]
         public async Task<IActionResult> Index(Institucion pInstitucion = null)
         {
             if (pInstitucion == null)

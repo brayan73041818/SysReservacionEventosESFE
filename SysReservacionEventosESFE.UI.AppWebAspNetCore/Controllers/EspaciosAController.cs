@@ -5,15 +5,18 @@ using Microsoft.AspNetCore.Mvc;
 using SysReservacionEventosESFE.EntidadesDeNegocio;
 using SysReservacionEventosESFE.LogicaDeNegocio;
 using System.Data;
+using SysReservacionEventosESFE.UI.AppWebAspNetCore.Models;
+
 
 namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
 {
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    [Authorize(Roles = "Administrador")]
     public class EspaciosAController : Controller
     {
         EspaciosABL EspaciosABL = new EspaciosABL();
         // GET: EspaciosAController
+        [AuthorizeUser(IdAcceso: 6)]
+
         public async Task<IActionResult> Index(EspaciosA pEspaciosA = null)
         {
             if (pEspaciosA == null)

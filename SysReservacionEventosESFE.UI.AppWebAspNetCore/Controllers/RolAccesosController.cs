@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using SysReservacionEventosESFE.EntidadesDeNegocio;
 using SysReservacionEventosESFE.LogicaDeNegocio;
+using SysReservacionEventosESFE.UI.AppWebAspNetCore.Models;
 
 
 namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
@@ -26,6 +27,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
         public static int idRol;
 
         // GET: ProductoController
+        [AuthorizeUser(IdAcceso: 7)]
         public async Task<IActionResult> Index(RolAccesos pRolAccesos = null)
         {
             if (pRolAccesos == null)

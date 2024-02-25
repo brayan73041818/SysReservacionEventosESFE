@@ -12,9 +12,11 @@ using SysReservacionEventosESFE.EntidadesDeNegocio;
 using SysReservacionEventosESFE.LogicaDeNegocio;
 using SysReservacionEventosESFE.UI.AppWebAspNetCore.Models;
 
+
+
 namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
 {
-
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
     public class EventoController : Controller
     {
         EventoBL EventoBL = new EventoBL();
@@ -25,6 +27,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
 
 
         // GET: EventoController
+        [AuthorizeUser(IdAcceso: 3)]
         public async Task<IActionResult> Index(DateTime fInicio, DateTime fFinal, Evento pEvento = null)
         {
             if (pEvento == null)

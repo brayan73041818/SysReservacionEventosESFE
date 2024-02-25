@@ -45,7 +45,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
             return View(usuarios);
         }
 
-  
+        [AuthorizeUser(IdAcceso: 1)]
         // GET: UsuarioController/Details/5
         public async Task<IActionResult> Details(int Id)
         {
@@ -54,9 +54,9 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
             return View(usuario);
         }
 
-        
+        [AuthorizeUser(IdAcceso: 1)]
         // GET: UsuarioController/Create
-        [AllowAnonymous]
+       
         public async Task<IActionResult> Create()
         {
             ViewBag.Roles = await rolBL.ObtenerTodosAsync();
@@ -65,7 +65,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
         }
 
         // POST: UsuarioController/Create
-        [AllowAnonymous]
+        [AuthorizeUser(IdAcceso: 1)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Usuario pUsuario)
@@ -83,7 +83,9 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
             }
         }
 
+
         // GET: UsuarioController/Edit/5
+        [AuthorizeUser(IdAcceso: 1)]
         public async Task<IActionResult> Edit(Usuario pUsuario)
         {
             var taskObtenerPorId = usuarioBL.ObtenerPorIdAsync(pUsuario);
@@ -94,6 +96,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
             return View(usuario);
         }
 
+        [AuthorizeUser(IdAcceso: 1)]
         // POST: UsuarioController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -112,6 +115,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
             }
         }
 
+        [AuthorizeUser(IdAcceso: 1)]
         // GET: UsuarioController/Delete/5
         public async Task<IActionResult> Delete(Usuario pUsuario)
         {
@@ -123,6 +127,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
         }
 
         // POST: UsuarioController/Delete/5
+        [AuthorizeUser(IdAcceso: 1)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int Id, Usuario pUsuario)
