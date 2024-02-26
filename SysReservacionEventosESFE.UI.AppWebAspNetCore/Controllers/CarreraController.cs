@@ -36,6 +36,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
         }
 
         // GET: RolController/Details/5
+        [AuthorizeUser(IdAcceso: 4)]
         public async Task<IActionResult> Details(int IdCarrera)
         {
             var carrera = await carreraBL.ObtenerPorIdAsync(new Carrera { IdCarrera = IdCarrera });
@@ -43,6 +44,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
         }
 
         // GET: RolController/Create
+        [AuthorizeUser(IdAcceso: 4)]
         public IActionResult Create()
         {
             ViewBag.Error = "";
@@ -50,6 +52,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
         }
 
         // POST: RolController/Create
+        [AuthorizeUser(IdAcceso: 4)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Carrera pCarrera)
@@ -67,6 +70,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
         }
 
         // GET: RolController/Edit/5
+        [AuthorizeUser(IdAcceso: 4)]
         public async Task<IActionResult> Edit(Carrera pCarrera)
         {
             var carrera = await carreraBL.ObtenerPorIdAsync(pCarrera);
@@ -75,6 +79,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
         }
 
         // POST: RolController/Edit/5
+        [AuthorizeUser(IdAcceso: 4)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int IdCarrera, Carrera pCarrera)
@@ -92,6 +97,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
         }
 
         // GET: RolController/Delete/5
+        [AuthorizeUser(IdAcceso: 4)]
         public async Task<IActionResult> Delete(Carrera pCarrera)
         {
             ViewBag.Error = "";
@@ -100,6 +106,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
         }
 
         // POST: RolController/Delete/5
+        [AuthorizeUser(IdAcceso: 4)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int IdCarrera, Carrera pCarrera)

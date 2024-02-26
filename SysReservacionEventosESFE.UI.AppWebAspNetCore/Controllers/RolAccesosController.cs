@@ -49,9 +49,10 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
             return View(RolAccesoss);
         }
 
-     
+
 
         // GET: RolAccesosController/Create
+        [AuthorizeUser(IdAcceso: 7)]
 
         public async Task<IActionResult> Create()
         {
@@ -62,6 +63,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
         }
 
         // POST: RolAccesosController/Create
+        [AuthorizeUser(IdAcceso: 7)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(RolAccesos pRolAccesos, string Rol, List<int> Acceso )
@@ -91,6 +93,8 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
                 return View(pRolAccesos);
             }
         }
+
+        [AuthorizeUser(IdAcceso: 7)]
         public async Task<IActionResult> Edit(int IdRol)
         {
             var Rol = await RolBL.ObtenerPorIdAsync(new Rol { Id = IdRol });
@@ -101,7 +105,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
             return View();
         }
 
-
+        [AuthorizeUser(IdAcceso: 7)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(RolAccesos pRolAccesos, int IdRol, List<int> Acceso)
@@ -130,7 +134,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
             }
         }
 
-
+        [AuthorizeUser(IdAcceso: 7)]
         // GET: RolAccesosController/Delete/5
         public async Task<IActionResult> Delete(RolAccesos pRolAccesos)
         {
@@ -142,6 +146,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
         }
 
         // POST: RolAccesosController/Delete/5
+        [AuthorizeUser(IdAcceso: 7)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int IdRolAccesos, RolAccesos pRolAccesos)
@@ -165,6 +170,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
             }
         }
 
+        [AuthorizeUser(IdAcceso: 7)]
         public async Task<IActionResult> Reportes(RolAccesos pRolAccesos, int IdRol)
         {
             List<Rol> rol = await RolBL.ObtenerTodosAsync();

@@ -33,6 +33,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             return View(Instituciones);
         }
 
+        [AuthorizeUser(IdAcceso: 5)]
         // GET: InstitucionContInstitucionler/Details/5
         public async Task<IActionResult> Details(int IdInstitucion)
         {
@@ -40,6 +41,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             return View(Institucion);
         }
 
+        [AuthorizeUser(IdAcceso: 5)]
         // GET: InstitucionContInstitucionler/Create
         public IActionResult Create()
         {
@@ -47,6 +49,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             return View();
         }
 
+        [AuthorizeUser(IdAcceso: 5)]
         // POST: InstitucionContInstitucionler/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -64,6 +67,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             }
         }
 
+        [AuthorizeUser(IdAcceso: 5)]
         // GET: InstitucionContInstitucionler/Edit/5
         public async Task<IActionResult> Edit(Institucion pInstitucion)
         {
@@ -72,6 +76,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             return View(Institucion);
         }
 
+        [AuthorizeUser(IdAcceso: 5)]
         // POST: InstitucionContInstitucionler/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -89,6 +94,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             }
         }
 
+        [AuthorizeUser(IdAcceso: 5)]
         // GET: InstitucionContInstitucionler/Delete/5
         public async Task<IActionResult> Delete(Institucion pInstitucion)
         {
@@ -97,6 +103,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             return View(Institucion);
         }
 
+        [AuthorizeUser(IdAcceso: 5)]
         // POST: InstitucionContInstitucionler/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]

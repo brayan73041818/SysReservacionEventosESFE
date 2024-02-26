@@ -36,6 +36,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             return View(roles);
         }
 
+        [AuthorizeUser(IdAcceso: 2)]
         // GET: RolController/Details/5
         public async Task<IActionResult> Details(int id)
         {
@@ -43,6 +44,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             return View(rol);
         }
 
+        [AuthorizeUser(IdAcceso: 2)]
         // GET: RolController/Create
         public IActionResult Create()
         {
@@ -50,6 +52,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             return View();
         }
 
+        [AuthorizeUser(IdAcceso: 2)]
         // POST: RolController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -67,6 +70,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             }
         }
 
+        [AuthorizeUser(IdAcceso: 2)]
         // GET: RolController/Edit/5
         public async Task<IActionResult> Edit(Rol pRol)
         {
@@ -75,6 +79,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             return View(rol);
         }
 
+        [AuthorizeUser(IdAcceso: 2)]
         // POST: RolController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -92,6 +97,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             }
         }
 
+        [AuthorizeUser(IdAcceso: 2)]
         // GET: RolController/Delete/5
         public async Task<IActionResult> Delete(Rol pRol)
         {
@@ -100,6 +106,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             return View(rol);
         }
 
+        [AuthorizeUser(IdAcceso: 2)]
         // POST: RolController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]

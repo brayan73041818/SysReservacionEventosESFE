@@ -30,6 +30,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             return View(EspaciosAes);
         }
 
+        [AuthorizeUser(IdAcceso: 6)]
         // GET: EspaciosAContEspaciosAler/Details/5
         public async Task<IActionResult> Details(int IdEspaciosA)
         {
@@ -37,6 +38,8 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             return View(EspaciosA);
         }
 
+
+        [AuthorizeUser(IdAcceso: 6)]
         // GET: EspaciosAContEspaciosAler/Create
         public IActionResult Create()
         {
@@ -45,6 +48,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
         }
 
         // POST: EspaciosAContEspaciosAler/Create
+        [AuthorizeUser(IdAcceso: 6)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(EspaciosA pEspaciosA)
@@ -62,6 +66,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
         }
 
         // GET: EspaciosAContEspaciosAler/Edit/5
+        [AuthorizeUser(IdAcceso: 6)]
         public async Task<IActionResult> Edit(EspaciosA pEspaciosA)
         {
             var EspaciosA = await EspaciosABL.ObtenerPorIdAsync(pEspaciosA);
@@ -70,6 +75,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
         }
 
         // POST: EspaciosAContEspaciosAler/Edit/5
+        [AuthorizeUser(IdAcceso: 6)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int IdAsinacion, EspaciosA pEspaciosA)
@@ -87,6 +93,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
         }
 
         // GET: EspaciosAContEspaciosAler/Delete/5
+        [AuthorizeUser(IdAcceso: 6)]
         public async Task<IActionResult> Delete(EspaciosA pEspaciosA)
         {
             ViewBag.Error = "";
@@ -95,6 +102,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
         }
 
         // POST: EspaciosAContEspaciosAler/Delete/5
+        [AuthorizeUser(IdAcceso: 6)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int IdEspaciosA, EspaciosA pEspaciosA)

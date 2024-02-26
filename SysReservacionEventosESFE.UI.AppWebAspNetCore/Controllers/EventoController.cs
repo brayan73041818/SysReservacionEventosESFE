@@ -58,6 +58,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             return View(Eventos);
         }
 
+        [AuthorizeUser(IdAcceso: 3)]
         // GET: ProductoController/Details/5
         public async Task<IActionResult> Details(int IdEvento)
         {
@@ -71,6 +72,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
 
         // GET: ProductoController/Create
 
+        [AuthorizeUser(IdAcceso: 3)]
         public async Task<IActionResult> Create()
         {
             ViewBag.Carrera = await CarreraBL.ObtenerTodosAsync();
@@ -82,7 +84,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             return View();
         }
 
-
+        [AuthorizeUser(IdAcceso: 3)]
         // POST: ProductoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -106,6 +108,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             }
         }
 
+        [AuthorizeUser(IdAcceso: 3)]
         // GET: ProductoController/Edit/5
         public async Task<IActionResult> Edit(Evento pEvento)
         {
@@ -123,6 +126,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             return View(Evento);
         }
 
+        [AuthorizeUser(IdAcceso: 3)]
         // POST: EventoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -169,6 +173,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             }
         }
 
+        [AuthorizeUser(IdAcceso: 3)]
         // GET: EventoController/Delete/5
         public async Task<IActionResult> Delete(Evento pEvento)
         {
@@ -181,6 +186,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             return View(Evento);
         }
 
+        [AuthorizeUser(IdAcceso: 3)]
         // POST: ProductoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -211,6 +217,7 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             }
         }
 
+        [AuthorizeUser(IdAcceso: 3)]
         public async Task<IActionResult> Reserva()
         {
             ViewBag.Carrera = await CarreraBL.ObtenerTodosAsync();
@@ -221,6 +228,8 @@ namespace SysReservacionEventosESFE.UI.AppWebAspNetCore.Controllers
             ViewBag.Error = "";
             return View();
         }
+
+        [AuthorizeUser(IdAcceso: 3)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Reserva(Evento pEvento, int IdEspaciosA)
