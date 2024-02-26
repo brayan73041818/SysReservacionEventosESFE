@@ -4,8 +4,7 @@
     ViewData["Title"] = "Delete";
 }
 
-@if (User.IsInRole("Administrador"))
-{
+
    
 
     <h1>Delete</h1>
@@ -85,87 +84,3 @@
             <span class="text-danger">@ViewBag.Error</span>
         }
     </div>
-}
-
-@if (User.IsInRole("Maestro"))
-{
-
-
-    <h1>Delete</h1>
-
-    <h3>¿ Esta seguro que desea eliminar ?</h3>
-    <div>
-        <h4>Evento</h4>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Responsable)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Responsable)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Descripcion)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.NAsistentes)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.NAsistentes)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.HoraFin)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.HoraFin)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.HoraInicio)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.HoraInicio)
-            </dd>
-            <dt class="col-sm-2">
-                Espacio
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.EspaciosA.Nombre)
-            </dd>
-            <dt class="col-sm-2">
-                Institucion
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Institucion.Nombre)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Carrera)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Carrera.Nombre)
-            </dd>
-            <dt class="col-sm-2">
-                Reservo
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Usuario.Nombre)
-            </dd>
-
-        </dl>
-        @using (Html.BeginForm("Delete", "Evento", new { IdEvento = Model.IdEvento }, FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-
-            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de eliminar?');" style="margin-left: 10px;">
-                <i class="fas fa-trash"></i> Eliminar
-            </button>
-
-            <button type="button" class="btn btn-secondary" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
-                <i class="fas fa-times"></i> Cancelar
-            </button>
-            <span class="text-danger">@ViewBag.Error</span>
-        }
-    </div>
-}

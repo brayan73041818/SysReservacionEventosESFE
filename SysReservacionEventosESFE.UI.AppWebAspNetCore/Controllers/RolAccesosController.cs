@@ -12,6 +12,7 @@ using System.Security.Claims;
 using SysReservacionEventosESFE.EntidadesDeNegocio;
 using SysReservacionEventosESFE.LogicaDeNegocio;
 using SysReservacionEventosESFE.UI.AppWebAspNetCore.Models;
+using SysReservacionEventosESFE.AccesoADatos;
 
 
 namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
@@ -48,14 +49,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
             return View(RolAccesoss);
         }
 
-        // GET: RolAccesosController/Details/5
-        public async Task<IActionResult> Details(int IdRolAcceso)
-        {
-            var RolAccesos = await RolAccesosBL.ObtenerPorIdAsync(new RolAccesos { IdRolAcceso = IdRolAcceso });
-            RolAccesos.Rol = await RolBL.ObtenerPorIdAsync(new Rol { Id = RolAccesos.IdRol });
-            RolAccesos.Accesos = await AccesosBL.ObtenerPorIdAsync(new Accesos { IdAcceso = RolAccesos.IdAcceso });
-            return View(RolAccesos);
-        }
+     
 
         // GET: RolAccesosController/Create
 
@@ -87,7 +81,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
                 }
 
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Reportes));
             }
             catch (Exception ex)
             {
@@ -97,38 +91,45 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
                 return View(pRolAccesos);
             }
         }
-
-        // GET: RolAccesosController/Edit/5
-        public async Task<IActionResult> Edit(RolAccesos pRolAccesos)
+        public async Task<IActionResult> Edit(int IdRol)
         {
-            var taskObtenerPorIdRolAccesos = RolAccesosBL.ObtenerPorIdAsync(pRolAccesos);
-            var taskObtenerTodosRol = RolBL.ObtenerTodosAsync();
-            var taskObtenerTodosAccesos = AccesosBL.ObtenerTodosAsync();
-            var RolAccesos = await taskObtenerPorIdRolAccesos;
-            ViewBag.Rol = await taskObtenerTodosRol;
-            ViewBag.Accesos = await taskObtenerTodosAccesos;
+            var Rol = await RolBL.ObtenerPorIdAsync(new Rol { Id = IdRol });
+            ViewBag.Accesos = await AccesosBL.ObtenerTodosAsync();
+            ViewBag.RolId = IdRol;
+            ViewBag.RolNombre = Rol != null ? Rol.Nombre : ""; // Pasar solo el nombre del rol a ViewBag
             ViewBag.Error = "";
-            return View(RolAccesos);
+            return View();
         }
 
-        // POST: RolAccesosController/Edit/5
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int IdRolAccesos, RolAccesos pRolAccesos)
+        public async Task<IActionResult> Edit(RolAccesos pRolAccesos, int IdRol, List<int> Acceso)
         {
             try
             {
-                int result = await RolAccesosBL.ModificarAsync(pRolAccesos);
-                return RedirectToAction(nameof(Index));
+             
+
+                foreach (var acc in Acceso)
+                {
+                    RolAccesos nuevoRolAcceso = new RolAccesos();
+                    nuevoRolAcceso.IdRol = IdRol;
+                    nuevoRolAcceso.IdAcceso = acc;
+                    await RolAccesosBL.CrearAsync(nuevoRolAcceso);
+                }
+
+
+                return RedirectToAction(nameof(Reportes));
             }
             catch (Exception ex)
             {
-                ViewBag.Error = ex.Message;
                 ViewBag.Rol = await RolBL.ObtenerTodosAsync();
                 ViewBag.Accesos = await AccesosBL.ObtenerTodosAsync();
+                ViewBag.Error = ex.Message;
                 return View(pRolAccesos);
             }
         }
+
 
         // GET: RolAccesosController/Delete/5
         public async Task<IActionResult> Delete(RolAccesos pRolAccesos)
@@ -148,7 +149,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
             try
             {
                 int result = await RolAccesosBL.EliminarAsync(pRolAccesos);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Reportes));
             }
             catch (Exception ex)
             {
@@ -164,5 +165,24 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
             }
         }
 
+        public async Task<IActionResult> Reportes(RolAccesos pRolAccesos, int IdRol)
+        {
+            List<Rol> rol = await RolBL.ObtenerTodosAsync();
+            List<RolAccesos> rolAccesos = await RolAccesosBL.ObtenerTodosAsync();
+
+            if (IdRol != 0)
+            {
+                ViewBag.Rol = rol.Where(r => r.Id == IdRol).ToList();
+            }
+            else
+            {
+                ViewBag.Rol = rol;
+
+            }
+
+            ViewBag.RolAcceso = rolAccesos;
+
+            return View();
+        }
     }
 }

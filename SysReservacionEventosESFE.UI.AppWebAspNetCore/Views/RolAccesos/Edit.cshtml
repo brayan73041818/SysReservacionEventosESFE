@@ -1,29 +1,28 @@
 ﻿@model SysReservacionEventosESFE.EntidadesDeNegocio.RolAccesos
 
 @{
-    ViewData["Title"] = "Create";
-    List<SysReservacionEventosESFE.EntidadesDeNegocio.Rol> rol = ViewBag.Rol as List<SysReservacionEventosESFE.EntidadesDeNegocio.Rol>;
+    ViewData["Title"] = "Edit";
+    List<SysReservacionEventosESFE.EntidadesDeNegocio.Rol> rol = ViewBag.Rols as List<SysReservacionEventosESFE.EntidadesDeNegocio.Rol>;
     List<SysReservacionEventosESFE.EntidadesDeNegocio.Accesos> accesos = ViewBag.Accesos as List<SysReservacionEventosESFE.EntidadesDeNegocio.Accesos>;
 }
+<h1>Edit</h1>
 
-<h1>Agregar rol</h1>
-
-
+<h4>Acceso</h4>
 <hr />
 
-<form asp-action="Create">
+<form asp-action="Edit">
     <!-- Tu formulario aquí -->
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
     <div class="row">
-
         <div class="col-md-4">
-            <div class="form-group">
-                <label name="Rol" class="control-label">Rol</label>
-                <input name="Rol" class="form-control" />
-                <span asp-validation-for="Rol" class="text-danger"></span>
-            </div>
-        </div>
+        <div class="form-group">
+            <label class="control-label">Institucion</label>
+            <input type="text" class="form-control" value="@ViewBag.RolNombre" readonly />
+            <input type="hidden" name="IdRol" value="@ViewBag.RolId" />
 
+        </div>
+        </div>
         <div class="col-md-4">
             <div class="form-group">
                 <label class="control-label">Acceso</label>
@@ -39,13 +38,15 @@
                 <span asp-validation-for="IdAcceso" class="text-danger"></span>
             </div>
         </div>
-
     </div>
+
+
+
 
     @*BOTONES EDITADOS CON ICONOS*@
 
     <div class="form-group" style="margin-top: 10px;">
-        <button type="submit" class="btn btn-success">
+        <button type="submit" class="btn btn-success" style="margin-right: 10px;">
             <i class="fas fa-save"></i> Guardar
         </button>
 
@@ -54,8 +55,6 @@
         </button>
     </div>
 
-
-
 </form>
 
 
@@ -63,4 +62,10 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    }
+    <script>
+        $(function () {
+            $("form input[name],form select[name]").trigger("blur");
+        });
+    </script>
+}
+

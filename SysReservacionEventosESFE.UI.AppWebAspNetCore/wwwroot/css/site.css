@@ -68,3 +68,95 @@ body {
     border-top-right-radius: 8px;
 }
 
+.carta-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start; /* Alinea las cartas en la parte superior */
+    align-content: flex-start; /* Forzar a las cartas a llenar los espacios vacíos */
+}
+
+.carta {
+    width: 48%;
+    height: auto;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.carta-detalle {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.carta-nombre {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.carta-acciones {
+    display: flex;
+    align-items: center;
+}
+
+    .carta-acciones button {
+        margin-left: 10px;
+    }
+
+.carta-titulo {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+
+
+/* Estilo personalizado para las casillas de verificación */
+.custom-checkbox .form-check-input[type="checkbox"] {
+    width: 1.2em;
+    height: 1.2em;
+    background-color: #fff;
+    border: 2px solid #4CAF50; /* Color del borde */
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.custom-checkbox .form-check-input[type="checkbox"]:checked {
+    background-color: #4CAF50; /* Color de fondo cuando está marcada */
+}
+
+.custom-checkbox .form-check-input[type="checkbox"]:hover {
+    cursor: pointer;
+}
+
+.custom-checkbox .form-check-label {
+    margin-left: 5px; /* Espacio entre la casilla de verificación y la etiqueta */
+}
+
+/* Estilo para el contenedor con scroll */
+.checkbox-container {
+    max-height: 40px; /* Altura máxima del contenedor */
+    overflow-y: auto; /* Agrega desplazamiento vertical si es necesario */
+    border: 1px solid #ccc; /* Borde para el contenedor */
+    border-radius: 5px;
+    padding: 5px; /* Espaciado interno */
+}
+
+.btn-transparent {
+    background-color: transparent;
+    /* También puedes ajustar otros estilos según sea necesario */
+    color: #fff; /* Color del texto */
+    border: none; /* Otros estilos */
+}

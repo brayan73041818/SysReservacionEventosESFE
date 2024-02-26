@@ -58,7 +58,7 @@ namespace SysReservacionEventosESFE.AccesoADatos
             var roles = new List<Rol>();
             using (var bdContexto = new BDContexto())
             {
-                roles = await bdContexto.Rol.ToListAsync();
+                roles = await bdContexto.Rol.Include(r => r. RolAccesos).ThenInclude(r=>r.Accesos).ToListAsync();
             }
             return roles;
         }

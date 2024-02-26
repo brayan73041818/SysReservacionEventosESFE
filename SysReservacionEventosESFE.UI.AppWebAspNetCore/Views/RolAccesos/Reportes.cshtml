@@ -1,0 +1,98 @@
+﻿@model IEnumerable<SysReservacionEventosESFE.EntidadesDeNegocio.RolAccesos>
+@{
+    ViewData["Title"] = "Roles";
+    int numPage = 1;
+    int numRegistros = 0;
+    int numRegistrosPorPage = 10;
+    int[] tops = { 10, 20, 50, 100, 500, 1000, 10000, -1 };
+    int topActual = Convert.ToInt32(ViewBag.Top);
+    List<SysReservacionEventosESFE.EntidadesDeNegocio.Rol> roles = ViewBag.Rol as List<SysReservacionEventosESFE.EntidadesDeNegocio.Rol>;
+    List<SysReservacionEventosESFE.EntidadesDeNegocio.Accesos> accesos = ViewBag.Accesos as List<SysReservacionEventosESFE.EntidadesDeNegocio.Accesos>;
+    List<SysReservacionEventosESFE.EntidadesDeNegocio.RolAccesos> rolaccesos = ViewBag.RolAccesos as List<SysReservacionEventosESFE.EntidadesDeNegocio.RolAccesos>;
+
+    ViewBag.rolaccesos = rolaccesos;
+
+}
+
+
+
+<div class="row">
+    <form method="post" asp-action="Reportes">
+        <div class="row">
+         
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Rol</label>
+                    <select name="IdRol" class="form-control">
+                        <option selected value="0">SELECCIONAR</option>
+                        @foreach (var item in roles)
+                        {
+                            <option value="@item.Id">@item.Nombre</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 10px;">
+                <button type="submit" class="btn btn-primary" style="background-color: #0074D9; color: white;">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+
+                <button type="button" class="btn btn-success" onclick="window.location.href='@Url.Action("Create")'">
+                    <i class="fas fa-plus"></i> Crear rol
+                </button>
+
+
+            </div>
+
+
+        </div>
+    </form>
+</div>
+
+
+
+
+<div class="carta-container masonry">
+    @if (roles != null)
+    {
+        @foreach (var rolAccesos in roles)
+        {
+            <div class="carta">
+                <div class="carta-titulo">
+                    Rol: @rolAccesos.Nombre
+                    <button type="button" class="btn-transparent" onclick="window.location.href='@Url.Action("Edit", new { IdRol = rolAccesos.Id })'">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                @foreach (var detalle in rolAccesos.RolAccesos)
+                {
+                    <div class="carta-detalle">
+                        <div class="carta-nombre">Acceso: @detalle.Accesos.Nombre</div>
+                        <div class="carta-acciones">
+                            <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Delete", new { IdRolAcceso = detalle.IdRolAcceso })'">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    }
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
+
+<script>
+    // Espera a que el DOM esté completamente cargado
+    document.addEventListener("DOMContentLoaded", function () {
+        // Selecciona el contenedor de cartas y aplica Masonry.js
+        var grid = document.querySelector('.masonry');
+        var masonry = new Masonry(grid, {
+            itemSelector: '.carta',
+            columnWidth: '.carta',
+            percentPosition: true
+        });
+    });
+</script>

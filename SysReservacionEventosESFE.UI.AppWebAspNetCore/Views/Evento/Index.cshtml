@@ -100,18 +100,12 @@
                 <i class="fas fa-search"></i> Buscar
             </button>
 
-            @if (User.IsInRole("Administrador"))
-            {
                 <button type="button" class="btn btn-success" onclick="window.location.href='@Url.Action("Reserva")'">
                     <i class="fas fa-plus"></i> Agregar
             </button>
-            }
-            @if (User.IsInRole("Maestro"))
-            {
-                <button type="button" class="btn btn-success" onclick="window.location.href='@Url.Action("Reserva")'">
-                    <i class="fas fa-plus"></i> Agregar
-                </button>
-            }
+            
+          
+            
 
 
         </div>
