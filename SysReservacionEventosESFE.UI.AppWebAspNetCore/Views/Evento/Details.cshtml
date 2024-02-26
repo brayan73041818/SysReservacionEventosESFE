@@ -4,9 +4,8 @@
     ViewData["Title"] = "Details";
 }
 
-@if (User.IsInRole("Administrador"))
-{
-    <h1>Details</h1>
+
+    <h1>Detalles de evento</h1>
 
     <div>
         <h4>Evento</h4>
@@ -88,92 +87,3 @@
         </button>
     </td>
 
-}
-
-
-
-@if (User.IsInRole("Maestro"))
-{
-    <h1>Details</h1>
-
-    <div>
-        <h4>Evento</h4>
-        <hr />
-        <dl class="row">
-
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Responsable)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Responsable)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Descripcion)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.NAsistentes)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.NAsistentes)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.FechaEvento)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.FechaEvento)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.HoraInicio)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.HoraInicio)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.HoraFin)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.HoraFin)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.IdEspaciosA)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.EspaciosA.Nombre)
-            </dd>
-            <dt class="col-sm-2">
-                Intitucion
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Institucion.Nombre)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.IdCarrera)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Carrera.Nombre)
-            </dd>
-            <dt class="col-sm-2">
-                Registrado por
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Usuario.Nombre)
-            </dd>
-
-        </dl>
-    </div>
-    <td class="botonestabla">
-        <button type="button" class="btn btn-success" style="background-color: #264DA0; color: white; margin-right: 10px;" onclick="window.location.href='@Url.Action("Edit", new { IdEvento = Model.IdEvento })'">
-            <i class="fas fa-pencil-alt"></i> Ir a Modificar
-        </button>
-    </td>
-
-    <td class="botonestabla">
-        <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
-            <i class="fas fa-times"></i> Cancelar
-        </button>
-    </td>
-
-}
