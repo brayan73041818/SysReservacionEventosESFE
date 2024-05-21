@@ -27,7 +27,7 @@ namespace SysReservacionEventosESFE.AccesoADatos
 
         {
 
-            optionsBuilder.UseSqlServer(@"workstation id=SysReservacionesEsfe.mssql.somee.com;packet size=4096;user id=JavierGarcia_SQLLogin_1;pwd=aibjbvtba6;data source=SysReservacionesEsfe.mssql.somee.com;persist security info=False;initial catalog=SysReservacionesEsfe;Encrypt=False;TrustServerCertificate=False;");
+            optionsBuilder.UseSqlServer(@"workstation id=workstation id=SysReservacionesESFE.mssql.somee.com;packet size=4096;user id=montoya000422_SQLLogin_1;pwd=1vqq5kl33j;data source=SysReservacionesESFE.mssql.somee.com;persist security info=False;initial catalog=SysReservacionesESFE;TrustServerCertificate=True;Encrypt=False;TrustServerCertificate=False;");
         }
 
     }
